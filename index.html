@@ -15,6 +15,11 @@
       <input type="text" id="category" placeholder="Category" required />
       <input type="text" id="description" placeholder="Description" required />
       <input type="number" id="amount" placeholder="Amount (₹)" required />
+
+      <!-- New dropdown for 'Paid By' -->
+<input type="text" id="paidBy" placeholder="Paid by (name)" required />
+
+
       <button type="submit">Add Expense</button>
     </form>
 
@@ -27,10 +32,16 @@
           <th>Category</th>
           <th>Description</th>
           <th>Amount (₹)</th>
+          <th>Paid By</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody id="expense-table-body"></tbody>
     </table>
+
+    <!-- New section for displaying balances -->
+    <h2>🔄 Who Owes Whom</h2>
+    <div id="balances" class="balances"></div>
   </div>
 
   <script type="module" src="scripts/main.js"></script>

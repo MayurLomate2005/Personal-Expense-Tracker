@@ -1,17 +1,15 @@
-// main.js – entry point
-
+// 🚀 Updated main.js with Split Logic
 import { getExpenses, saveExpense } from './db.js';
-import { renderTable, showStatus } from './ui.js';
+import { renderTable, renderBalances, showStatus } from './ui.js';
 
 const form = document.getElementById('expense-form');
+const settleBtn = document.getElementById('settle-btn');
 
 let isEditing = false;
 let editExpenseId = null;
 
-// Update UI on load
 window.addEventListener('load', updateUI);
 
-// Handle form submission
 form.addEventListener('submit', e => {
   e.preventDefault();
 
@@ -20,10 +18,11 @@ form.addEventListener('submit', e => {
     date: document.getElementById('date').value,
     category: document.getElementById('category').value,
     description: document.getElementById('description').value,
-    amount: parseFloat(document.getElementById('amount').value)
+    amount: parseFloat(document.getElementById('amount').value),
+    paidBy: document.getElementById('paidBy').value
   };
 
-  if (!updatedExpense.date || !updatedExpense.category || !updatedExpense.description || isNaN(updatedExpense.amount)) {
+  if (!updatedExpense.date || !updatedExpense.category || !updatedExpense.description || isNaN(updatedExpense.amount) || !updatedExpense.paidBy) {
     alert('Please fill all fields correctly.');
     return;
   }
@@ -37,9 +36,7 @@ form.addEventListener('submit', e => {
       localStorage.setItem('advanced_expenses', JSON.stringify(expenses));
       showStatus('✅ Expense updated!');
     }
-    document.querySelector('#expense-form button').textContent = 'Add Expense';
-    isEditing = false;
-    editExpenseId = null;
+    resetEditState();
   } else {
     saveExpense(updatedExpense);
     showStatus('✅ Expense added!');
@@ -49,14 +46,19 @@ form.addEventListener('submit', e => {
   updateUI();
 });
 
-// Function to update the table
 function updateUI() {
   const expenses = getExpenses();
   renderTable(expenses);
+  renderBalances(expenses);
 }
 
-// Trigger edit mode
-function triggerEditMode(id) {
+function resetEditState() {
+  isEditing = false;
+  editExpenseId = null;
+  document.querySelector('#expense-form button').textContent = 'Add Expense';
+}
+
+export function triggerEditMode(id) {
   const expenses = getExpenses();
   const expense = expenses.find(exp => exp.id === id);
   if (!expense) return;
@@ -65,12 +67,10 @@ function triggerEditMode(id) {
   document.getElementById('category').value = expense.category;
   document.getElementById('description').value = expense.description;
   document.getElementById('amount').value = expense.amount;
+  document.getElementById('paidBy').value = expense.paidBy;
 
   isEditing = true;
   editExpenseId = id;
 
   document.querySelector('#expense-form button').textContent = 'Update Expense';
 }
-
-// ✅ Export for use in ui.js
-export { triggerEditMode };
