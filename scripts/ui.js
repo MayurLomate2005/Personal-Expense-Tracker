@@ -7,6 +7,7 @@ export function renderTable(expenses) {
   expenses.forEach(exp => {
     const row = document.createElement('tr');
     row.innerHTML = `
+      <td>${exp.tripTitle || '—'}</td>
       <td>${exp.date}</td>
       <td>${exp.category}</td>
       <td>${exp.description}</td>
@@ -20,7 +21,6 @@ export function renderTable(expenses) {
     tbody.appendChild(row);
   });
 
-  // Attach Edit button listeners
   document.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       const id = parseInt(e.target.dataset.id);
@@ -28,7 +28,6 @@ export function renderTable(expenses) {
     });
   });
 
-  // Attach Delete button listeners
   document.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', e => {
       const id = parseInt(e.target.dataset.id);
@@ -97,7 +96,6 @@ export function renderBalances(expenses) {
   }
 }
 
-// 🗑️ Delete expense and update UI
 function deleteExpense(id) {
   const expenses = JSON.parse(localStorage.getItem('advanced_expenses')) || [];
   const updated = expenses.filter(exp => exp.id !== id);

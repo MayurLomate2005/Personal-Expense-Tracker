@@ -10,16 +10,19 @@
   <div class="container">
     <h1>💸 Advanced Expense Tracker</h1>
 
+    <!-- Trip Section -->
+    <div id="trip-section">
+      <h2>📌 Trip/Event Info</h2>
+      <input type="text" id="tripTitle" placeholder="Trip Title (e.g. Goa Trip)" required />
+      <input type="date" id="tripDate" required />
+      <button id="startTrip">➕ Start Trip</button>
+    </div>
+
     <form id="expense-form">
-      <input type="date" id="date" required />
       <input type="text" id="category" placeholder="Category" required />
       <input type="text" id="description" placeholder="Description" required />
       <input type="number" id="amount" placeholder="Amount (₹)" required />
-
-      <!-- New dropdown for 'Paid By' -->
-<input type="text" id="paidBy" placeholder="Paid by (name)" required />
-
-
+      <input type="text" id="paidBy" placeholder="Paid by (name)" required />
       <button type="submit">Add Expense</button>
     </form>
 
@@ -28,6 +31,7 @@
     <table>
       <thead>
         <tr>
+          <th>Trip Title</th>
           <th>Date</th>
           <th>Category</th>
           <th>Description</th>
@@ -39,8 +43,6 @@
       <tbody id="expense-table-body"></tbody>
     </table>
 
-    <!-- New section for displaying balances -->
-    <h2>🔄 Who Owes Whom</h2>
     <div id="balances" class="balances"></div>
   </div>
 
