@@ -16,6 +16,8 @@
       <input type="text" id="tripTitle" placeholder="Trip Title (e.g. Goa Trip)" required />
       <input type="date" id="tripDate" required />
       <button id="startTrip">➕ Start Trip</button>
+      <button id="newTrip">🆕 New Trip</button>
+      <button id="viewHistory">🕘 View History</button>
     </div>
 
     <form id="expense-form">
@@ -44,6 +46,12 @@
     </table>
 
     <div id="balances" class="balances"></div>
+
+    <!-- Trip History Section -->
+    <div id="history-section" class="hidden">
+      <h2>📜 Trip History</h2>
+      <ul id="trip-history-list"></ul>
+    </div>
   </div>
 
   <script type="module" src="scripts/main.js"></script>

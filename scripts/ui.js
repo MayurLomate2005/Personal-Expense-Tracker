@@ -1,4 +1,4 @@
-import { triggerEditMode } from './main.js';
+// import { triggerEditMode } from './main.js';
 
 export function renderTable(expenses) {
   const tbody = document.getElementById('expense-table-body');
